@@ -1,4 +1,6 @@
-# Взвеенный поиск
+#!/usr/bin/env python3
+
+# Неинформированный взвешанный поиск
 # Uniform Cost Search
 
 
