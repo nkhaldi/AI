@@ -6,17 +6,17 @@ import matplotlib.pyplot as plt
 from keras.datasets import mnist
 from keras.utils import to_categorical
 
-(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+(tr_images, tr_labels), (ts_images, ts_labels) = mnist.load_data()
 
 # Подготовка исходных данных
-train_images = train_images.reshape((60000, 28*28))
-train_images = train_images.astype('float32') / 255
-test_images = test_images.reshape((10000, 28*28))
-test_images = test_images.astype('float32') / 255
+tr_images = tr_images.reshape((60000, 28*28))
+tr_images = tr_images.astype('float32') / 255
+ts_images = ts_images.reshape((10000, 28*28))
+ts_images = ts_images.astype('float32') / 255
 
 # Подготовка меток
-train_labels = to_categorical(train_labels)
-test_labels = to_categorical(test_labels)
+tr_labels = to_categorical(tr_labels)
+ts_labels = to_categorical(ts_labels)
 
 # Aрхитектура сети
 nn = models.Sequential()
@@ -31,15 +31,15 @@ nn.compile(optimizer='adam',
            metrics=['accuracy'])
 
 # Обучение сети методом fit и тестирование
-nn.fit(train_images, train_labels, epochs=10, batch_size=128)
-test_loss, test_acc = nn.evaluate(test_images, test_labels)
-print('test_acc: ', test_acc)
+nn.fit(tr_images, tr_labels, epochs=10, batch_size=128)
+ts_loss, ts_acc = nn.evaluate(ts_images, ts_labels)
+print('ts_acc: ', ts_acc)
 
 # Создание проверочного набора
-x_val = train_images[:5000]
-partial_x_train = train_images[5000:]
-y_val = train_labels[:5000]
-partial_y_train = train_labels[5000:]
+x_val = tr_images[:5000]
+partial_x_train = tr_images[5000:]
+y_val = tr_labels[:5000]
+partial_y_train = tr_labels[5000:]
 
 # Обучение сети
 hist = nn.fit(partial_x_train, partial_y_train,

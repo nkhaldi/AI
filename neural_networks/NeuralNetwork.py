@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Описание класса нейронной сети
-# Neural tetwork class discribtion
+# Neural network class discribtion
 
 
 import numpy as np
