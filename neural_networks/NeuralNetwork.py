@@ -4,14 +4,13 @@
 # Neural network class discribtion
 
 
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.special
-import matplotlib.pyplot as plt
 
 
-class NeuralNetwork():
-    def __init__(self, inputnodes, hidennodes,
-                 outputnodes, learning_rate):
+class NeuralNetwork:
+    def __init__(self, inputnodes, hidennodes, outputnodes, learning_rate):
         # Кол-во нейронов в каждом слое
         self.inodes = inputnodes
         self.hnodes = hidennodes
@@ -44,13 +43,11 @@ class NeuralNetwork():
 
         # Находим ошибку и обновляем веса сети
         outputs_error = targets - final_outputs
-        self.who += self.lr*np.dot((outputs_error*final_outputs*(1 -
-                                    final_outputs)), hidden_outputs.T)
+        self.who += self.lr * np.dot((outputs_error * final_outputs * (1 - final_outputs)), hidden_outputs.T)
 
         # Вычисление ошибок скрытого слоя
         hidden_error = np.dot(self.who.T, outputs_error)
-        self.wih += self.lr*np.dot((hidden_error*hidden_outputs*(1 -
-                                    hidden_outputs)), inputs.T)
+        self.wih += self.lr * np.dot((hidden_error * hidden_outputs * (1 - hidden_outputs)), inputs.T)
 
     def query(self, inputs_list):
         # Преобразование входной список в двумерный массив

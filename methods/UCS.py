@@ -32,6 +32,4 @@ def UCS_paths(Graph, source, target):
             return path
         for [vertex_child, price] in Graph.graph[vertex]:
             if vertex_child not in path:
-                    queue.extend([(
-                        price + price_parent,
-                        vertex_child, path + [vertex_child])])
+                queue.extend([(price + price_parent, vertex_child, path + [vertex_child])])

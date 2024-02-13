@@ -4,8 +4,8 @@
 # Support Vector Machine
 
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn import datasets, svm
 
 iris = datasets.load_iris()
@@ -20,21 +20,19 @@ order = np.random.permutation(n_sample)
 X = X[order]
 y = y[order].astype(np.float)
 
-X_train = X[:int(.9 * n_sample)]
-y_train = y[:int(.9 * n_sample)]
-X_test = X[int(.9 * n_sample):]
-y_test = y[int(.9 * n_sample):]
+X_train = X[: int(0.9 * n_sample)]
+y_train = y[: int(0.9 * n_sample)]
+X_test = X[int(0.9 * n_sample) :]
+y_test = y[int(0.9 * n_sample) :]
 
-for kernel in ('linear', 'rbf', 'poly'):
+for kernel in ("linear", "rbf", "poly"):
     clf = svm.SVC(kernel=kernel, gamma=10)
     clf.fit(X_train, y_train)
     plt.figure()
     plt.clf()
-    plt.scatter(X[:, 0], X[:, 1], c=y, zorder=10, cmap=plt.cm.Paired,
-                edgecolor='k', s=20)
-    plt.scatter(X_test[:, 0], X_test[:, 1], s=80, facecolors='none',
-                zorder=10, edgecolor='k')
-    plt.axis('tight')
+    plt.scatter(X[:, 0], X[:, 1], c=y, zorder=10, cmap=plt.cm.Paired, edgecolor="k", s=20)
+    plt.scatter(X_test[:, 0], X_test[:, 1], s=80, facecolors="none", zorder=10, edgecolor="k")
+    plt.axis("tight")
     x_min = X[:, 0].min()
     x_max = X[:, 0].max()
     y_min = X[:, 1].min()
@@ -44,7 +42,6 @@ for kernel in ('linear', 'rbf', 'poly'):
     Z = clf.decision_function(np.c_[XX.ravel(), YY.ravel()])
     Z = Z.reshape(XX.shape)
     plt.pcolormesh(XX, YY, Z > 0, cmap=plt.cm.Paired)
-    plt.contour(XX, YY, Z, colors=['k', 'k', 'k'],
-                linestyles=['--', '-', '--'], levels=[-.5, 0, .5])
+    plt.contour(XX, YY, Z, colors=["k", "k", "k"], linestyles=["--", "-", "--"], levels=[-0.5, 0, 0.5])
     plt.title(kernel)
 plt.show()

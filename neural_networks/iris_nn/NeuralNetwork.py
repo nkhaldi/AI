@@ -2,13 +2,12 @@
 
 # Описание класса нейронной сети
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 
-class NeuralNetwork():
-
+class NeuralNetwork:
     def __init__(self, X, Y, hidden, epochs=10000):
         self.a1 = None
         self.a2 = None
@@ -40,8 +39,7 @@ class NeuralNetwork():
         self.dz2 = self.a2 - Y
         self.dw2 = (1 / m) * np.dot(self.dz2, self.a1.T)
         self.db2 = (1 / m) * np.sum(self.dz2, axis=1, keepdims=True)
-        self.dz1 = np.multiply(np.dot(self.w2.T, self.dz2),
-                               1 - np.power(self.a1, 2))
+        self.dz1 = np.multiply(np.dot(self.w2.T, self.dz2), 1 - np.power(self.a1, 2))
         self.dw1 = (1 / m) * np.dot(self.dz1, X.T)
         self.db1 = (1 / m) * np.sum(self.dz1, axis=1, keepdims=True)
 
@@ -60,14 +58,13 @@ class NeuralNetwork():
         h = 0.01
         x_min, x_max = X[0, :].min() - 0.25, X[0, :].max() + 0.25
         y_min, y_max = X[1, :].min() - 0.25, X[1, :].max() + 0.25
-        xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                             np.arange(y_min, y_max, h))
+        xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
         Z = mod(np.c_[xx.ravel(), yy.ravel()])
         Z = Z.reshape(xx.shape)
 
         plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
         plt.scatter(X[0, :], X[1, :], c=y, cmap=plt.cm.Spectral)
         plt.title("Decision Boundary for hidden layer size " + str(6))
-        plt.xlabel('Petal Length')
-        plt.ylabel('Petal Width')
+        plt.xlabel("Petal Length")
+        plt.ylabel("Petal Width")
         plt.show()
